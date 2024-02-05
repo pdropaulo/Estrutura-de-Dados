@@ -1,0 +1,56 @@
+class Nodo:
+    
+    def __init__(self, valor):
+        self.elemento = valor
+        self.proximo = None
+        
+class Lista:
+    
+    def __init__(self):
+        self.head = None
+        self.end = None
+        self.qtd = 0
+        
+    def addNodo(self, valor):
+        novo = Nodo(valor)
+        if self.head == None or self.end == None:
+            self.head = novo
+            self.end = novo
+        else: 
+            self.end.proximo = novo
+            self.end = novo
+        self.qtd += 1
+
+    def delNodo(self, valor):
+        aux = self.head
+        ant = aux
+        
+        if ( aux.elemento == valor ):
+            self.head = aux.proximo
+            ant = None
+            return
+        
+        while ( aux != None ):
+            aux = aux.proximo
+            if ( aux.elemento == valor ):
+                ant.proximo = aux.proximo
+                aux.proximo = None 
+                return
+            else: ant = aux  
+        return
+              
+    def print_list(self):
+        aux = self.head
+        while ( aux != None ):
+            print(aux.elemento, "-->", end='')
+            aux = aux.proximo
+        print()
+        
+if __name__ == '__main__':
+    ll = Lista()
+    ll.addNodo(2)
+    ll.addNodo(3)
+    ll.addNodo(4)
+    ll.print_list()
+    ll.delNodo(2)
+    ll.print_list()
