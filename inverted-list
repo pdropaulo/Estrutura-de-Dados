@@ -1,0 +1,55 @@
+class Nodo:
+    
+    def __init__(self, valor):
+        self.elemento = valor
+        self.proximo = None
+        
+class Lista:
+    
+    def __init__(self):
+        self.head = None
+        self.end = None
+        self.qtd = 0
+        
+    def addNodo(self, valor):
+        novo = Nodo(valor)
+        if self.head == None or self.end == None:
+            self.head = novo
+            self.end = novo
+        else: 
+            self.end.proximo = novo
+            self.end = novo
+        self.qtd += 1
+    
+    def invert_list(self, lista):
+        nova_lista = Lista()
+        aux = lista.head
+        while (aux != None):
+            novo = Nodo(aux.elemento)
+            if nova_lista.head == None or nova_lista.end == None:
+                nova_lista.head = novo
+                nova_lista.end = novo
+            else:
+                novo.proximo = nova_lista.head
+                nova_lista.head = novo
+            nova_lista.qtd += 1
+            aux = aux.proximo
+        nova_lista.print_list(nova_lista)
+            
+    def print_list(self, lista):
+        aux = lista.head
+        while ( aux != None ):
+            print(aux.elemento, "-->", end='')
+            aux = aux.proximo
+        print()
+
+if __name__ == "__main__":
+    l = Lista()
+    l.addNodo(2)
+    l.addNodo(3)
+    l.addNodo(8)
+    l.addNodo(1)
+    l.addNodo(9)
+    l.addNodo(4)
+    l.print_list(l)
+    l.invert_list(l)
