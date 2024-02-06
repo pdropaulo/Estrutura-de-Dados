@@ -1,0 +1,67 @@
+class Nodo:
+    def __init__(self, valor):
+        self.elemento = valor
+        self.proximo = None
+        
+class Queue:
+    def __init__(self):
+        self.heap = None
+        self.end = None
+        self.qtd = 0
+        
+    def addNodo(self, valor):
+        novo = Nodo(valor)
+        
+        if ( self.heap == None ):
+            self.heap = novo
+        else: 
+            self.end.proximo = novo
+        self.end = novo
+        self.qtd += 1
+        
+    def printQueue(self):
+        if ( self.heap != None ):
+            print(self.heap.elemento)
+            self.popQueue()
+        print()
+    
+    def popQueue(self):
+        if ( self.heap == None ):
+            return 
+        else:
+            aux = self.heap
+            self.heap = self.heap.proximo
+            aux = None
+            self.qtd -= 1
+            return
+    
+    def invertedQueue(self):
+        new_queue = Queue()
+                
+        aux = self.heap
+        while ( aux != None ):
+            new = Nodo(aux.elemento)
+            if ( new_queue.heap == None ):
+                new_queue.heap = new
+                new_queue.end = new
+            else:
+                new.proximo = new_queue.heap
+                new_queue.heap = new
+            aux = aux.proximo    
+        new_queue.printQueue()
+
+if __name__ == "__main__":
+    q = Queue()
+    q.addNodo(2)
+    q.addNodo(3)
+    q.addNodo(4)
+    q.addNodo(5)
+    q.printQueue()
+    q.invertedQueue()
+    q.printQueue()
+    
+ 
+# ESTRUTURA FIFO, FIRST IN FIRST OUT, CRIADA DE MODO QUE TEM LEITURA 
+# APENAS DO PRIMEIRO ELEMENTO DA FILA, OU SEJA, A IMPRESSÃO DESSA FILA
+# MOSTRA O PRIMEIRO ELEMENTO DELA E O REMOVE. MESMO PRINCÍPIO SERIA USADO
+# NUMA ESTRUTRA FILO, FIRST IN LAST OUT, PORÉM USADO PARA PILHAS (STACKS)    
