@@ -1,0 +1,60 @@
+class Nodo:
+    def __init__(self, valor):
+        self.elemento = valor
+        self.proximo = None
+
+class Stack:
+    def __init__(self):
+        self.top = None
+        self.qtd = 0
+        
+    def addNodo(self, valor):
+        novo = Nodo(valor)
+        if self.top == None:
+            self.top = novo
+        else:
+            novo.proximo = self.top
+            self.top = novo
+    
+    def popTop(self):
+        aux = self.top.proximo
+        self.top.proximo = None
+        self.top = aux
+        aux = None 
+    
+    def printTop(self):
+        print(self.top.elemento)
+    
+    def invertStack(self):
+        aux = self.top
+        new_stack = Stack()
+        
+        while ( aux != None ):
+            novo = Nodo(aux.elemento)
+            if new_stack.top == None:
+                new_stack.top = novo
+            else:
+                novo.proximo = new_stack.top
+                new_stack.top = novo
+            aux = aux.proximo
+        
+        return new_stack
+            
+        
+if __name__ == '__main__':
+    s = Stack()
+    s.addNodo(3)
+    s.addNodo(5)
+    s.addNodo(1)
+    s.addNodo(9)
+    s.addNodo(7)
+    s.addNodo(4)
+    s.addNodo(8)
+    s.printTop()
+    r = s.invertStack()
+    r.printTop()
+    s.printTop()
+    s.popTop()
+    s.printTop()
+    r = r.invertStack()
+    r.printTop() # remover elemento de s não remove de r (são pilhas distintas)
